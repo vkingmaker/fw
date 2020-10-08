@@ -12,7 +12,9 @@ class BookController extends Controller
         $response = $client->request('GET', 'https://anapioficeandfire.com/api/books/');
         $sorted = collect(json_decode($response->getBody()))->sortByDesc('released');
         $books = collect($sorted->values()->all())->map(function($book) {
-           $comments_count = count(Comment::where('url', $book->url)->get());
+           $urlToArr = explode('/', $book->url);
+           $bookId = (int) $urlToArr[count($urlToArr)-1];
+           $comments_count = count(Comment::where('bookId', $bookId)->get());
            $book = collect($book);
            $book['comments_count'] = $comments_count;
            return $book;
