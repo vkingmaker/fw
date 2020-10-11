@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -15,7 +14,6 @@ class CommentController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -26,12 +24,24 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-
-       $response = Comment::create($this->validate($request,  [
+        $this->validate($request, [
             'bookId' => 'required|integer',
             'body' => 'required|max:500',
-        ]));
+        ]);
+
+        $response = Comment::create([
+            'bookId' => $request['bookId'],
+            'body' => $request['body'],
+            'userIp' => $request->ip()
+        ]);
 
         return response()->json($response);
+    }
+
+    public function show(Request $request, $bookId)
+    {
+        $comments = Comment::where('bookId', $bookId)->orderByDesc('created_at')->get();
+
+        return response()->json($comments);
     }
 }

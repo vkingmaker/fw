@@ -6,3 +6,18 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import 'book-custom-style';
+
+.brand {
+    position: fixed;
+    top: 1rem;
+    left: 3rem;
+    z-index: 1000;
+    cursor: pointer;
+}
+.loading {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+}

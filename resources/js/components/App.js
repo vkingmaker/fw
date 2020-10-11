@@ -1,24 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import Home from "./Home";
+import BookDetails from "./Book-details";
+import Layout from "./Layout";
+import store from "../redux/store";
 
 function App() {
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
-
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <BrowserRouter>
+            <Provider store={store}>
+                <Layout>
+                    <Switch>
+                        <Route path="/" component={Home} exact />
+                        <Route path="/book/:id" component={BookDetails} exact />
+                    </Switch>
+                </Layout>
+            </Provider>
+        </BrowserRouter>
     );
 }
 
 export default App;
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
+if (document.getElementById("app")) {
+    ReactDOM.render(<App />, document.getElementById("app"));
 }

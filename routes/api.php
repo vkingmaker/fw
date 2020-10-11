@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/books', 'BookController@index');
+Route::get('/books/{bookId}/comments', 'CommentController@show');
 Route::post('/comments', 'CommentController@store');
