@@ -1,6 +1,8 @@
 # Introduction
 Fw is a mini e-library that is used to display books with their details and what various readers has to say about the individual books in the comment sections.
 
+checkout the live demo <a href="https://murmuring-basin-13051.herokuapp.com/" target="_blank">here</a>
+
 #### Home page
 <img src="./home.png" >
 
